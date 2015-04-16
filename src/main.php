@@ -1,3 +1,9 @@
 <?php
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader->add('\Calculator\\', __DIR__ . '/../src/');
 
-namespace Calculator;
+$calculator = new \Calculator\WxCalculator(new \Calculator\Calculator());
+$calculator->Show();
+
+wxEntry();
+

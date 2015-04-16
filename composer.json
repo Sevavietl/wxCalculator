@@ -1,0 +1,27 @@
+{
+    "name":        "sevavietl/wxCalculator",
+    "version":     "0.0.1",
+    "type":        "",
+    "description": "Simple calculator written using wxPHP",
+    "license":     "",
+    "authors": [
+        {
+            "name":  "Vsevolod Vietluzhskykh",
+            "email": "sevavietl@gmail.com",
+            "role":  "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Calculator\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.5.*"
+    },
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "repositories": [
+    ]
+}

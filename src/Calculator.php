@@ -1,6 +1,6 @@
 <?php
 
-namespace Calculator
+namespace Calculator;
 
 class Calculator
 {
@@ -36,24 +36,41 @@ class Calculator
         }
     }
 
+    public function setResult($number)
+    {
+        $this->result = $number;
+    }
+
     protected function add($number)
     {
-        $this->getResult += $number;
+        $result = $this->getResult() + $number;
+        $this->setResult($result);
+        return $result;
     }
 
     protected function subtract($number)
     {
-        $this->getResult -= $number;
+        $result = $this->getResult() - $number;
+        $this->setResult($result);
+        return $result;
     }
 
     protected function multiply($number)
     {
-        $this->getResult *= $number;
+        $result = $this->getResult() * $number;
+        $this->setResult($result);
+        return $result;
     }
 
     protected function divide($number)
     {
-        $this->getResult /= $number;
+        if (0 === $number) {
+            return 'Err';
+        }
+
+        $result = $this->getResult() / $number;
+        $this->setResult($result);
+        return $result;
     }
 
     public function resetResult()
@@ -74,27 +91,31 @@ class Calculator
     public function setAction($action)
     {
         if (isset($this->action)) {
-            $this->calculate($action);
+            $this->action = $action;
+            return $this->calculate();
         }
 
         $this->action = $action;
+        return '';
     }
 
     public function setNumber($number)
     {
-        $this->number = $number;
+        if (isset($this->result)) {
+            $this->number = $number;
+        } else {
+            $this->result = $number;
+        }
     }
 
-    protected function calculate($action)
+    public function calculate()
     {
         if (isset($this->number)) {
-            if (method_exists($this, $action)) {
-                $this->$action($this->number)
+            if (method_exists($this, $this->action)) {
+                return $this->{$this->action}($this->number);
             }
-
-            return;
         }
 
-        throw new ErrException();
+        return 'Err';
     }
 }
